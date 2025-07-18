@@ -1,0 +1,85 @@
+sequenceDiagram
+    participant Client
+    participant APIGateway as API Gateway
+    participant Auth as Auth Service
+    participant Upload as Image Upload Service
+    participant Storage as Object Storage
+    participant Queue as Analysis Queue
+    participant Gemma as Gemma Model Service
+    participant Geo as Geo Suitability Service
+    participant Proximity as Proximity Service
+    participant Scoring as Scoring Engine
+    participant DB as Database
+
+    %% Authentication Flow
+    Client->>APIGateway: Authentication Request
+    APIGateway->>Auth: Validate Credentials
+    Auth->>DB: Check User Credentials
+    DB-->>Auth: User Validation Result
+    Auth-->>APIGateway: JWT Token
+    APIGateway-->>Client: Authentication Response
+
+    %% Image Upload API Flow
+    Client->>APIGateway: POST /api/v1/upload (with images & location)
+    APIGateway->>Auth: Validate JWT Token
+    Auth-->>APIGateway: Validation Result
+    APIGateway->>Upload: Process Upload Request
+    Upload->>DB: Create Upload Record
+    DB-->>Upload: Upload ID
+    par Process Each Image
+        Upload->>Storage: Store Image 1
+        Storage-->>Upload: Image 1 URL
+        Upload->>DB: Store Image 1 Metadata
+        Upload->>Storage: Store Image 2
+        Storage-->>Upload: Image 2 URL
+        Upload->>DB: Store Image 2 Metadata
+        Upload->>Storage: Store Image 3
+        Storage-->>Upload: Image 3 URL
+        Upload->>DB: Store Image 3 Metadata
+    end
+    Upload-->>APIGateway: Upload Success Response
+    APIGateway-->>Client: Upload Response with Upload ID
+
+    %% Tree Analysis API Flow
+    Client->>APIGateway: POST /api/v1/analyze (with upload_id)
+    APIGateway->>Auth: Validate JWT Token
+    Auth-->>APIGateway: Validation Result
+    APIGateway->>Queue: Queue Analysis Job
+    Queue->>DB: Update Upload Status (Processing)
+    Queue->>Storage: Retrieve Image URLs
+    Storage-->>Queue: Image URLs
+    Queue->>Gemma: Request Species Identification
+    Gemma->>Storage: Fetch Images
+    Storage-->>Gemma: Image Data
+    Gemma-->>Queue: Species Identification Results
+    Queue->>Gemma: Request Age Estimation
+    Gemma-->>Queue: Age Estimation Results
+    Queue->>DB: Store Analysis Results
+    DB-->>Queue: Analysis ID
+    Queue-->>APIGateway: Analysis Complete Notification
+    APIGateway-->>Client: Analysis Results Response
+
+    %% Certification API Flow
+    Client->>APIGateway: POST /api/v1/certify (with analysis_id)
+    APIGateway->>Auth: Validate JWT Token
+    Auth-->>APIGateway: Validation Result
+    APIGateway->>Scoring: Request Certification
+    Scoring->>DB: Retrieve Analysis Data
+    DB-->>Scoring: Analysis Data
+    Scoring->>DB: Retrieve Species Info
+    DB-->>Scoring: Species Information
+    Scoring->>Geo: Check Geographic Suitability
+    Geo->>DB: Get Location Rules
+    DB-->>Geo: Suitability Rules
+    Geo-->>Scoring: Suitability Score
+    Scoring->>Proximity: Check Nearby Trees
+    Proximity->>DB: Spatial Query for Nearby Trees
+    DB-->>Proximity: Nearby Tree Data
+    Proximity-->>Scoring: Proximity Score
+    Scoring->>Scoring: Calculate Environmental Score
+    Scoring->>DB: Store Certification Results
+    DB-->>Scoring: Certification ID
+    Scoring->>Scoring: Generate Recommendations
+    Scoring->>DB: Store Recommendations
+    Scoring-->>APIGateway: Certification Complete
+    APIGateway-->>Client: Certification Results Response
