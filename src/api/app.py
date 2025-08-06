@@ -7,7 +7,7 @@ from ..database.session import get_db
 from .routes import upload_router, analysis_router, certification_router
 
 app = FastAPI(
-    title="Green Certification API",
+    title="Green Duty API",
     description="API for tree analysis and certification system",
     version="1.0.0"
 )

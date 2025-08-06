@@ -9,7 +9,7 @@ from ..config import settings
 
 class StorageManager:
     """
-    Manages file storage operations for the Green Certification system.
+    Manages file storage operations for the Green Duty system.
     Supports local file system and can be extended to support cloud storage.
     """
 

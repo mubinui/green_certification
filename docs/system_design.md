@@ -1,8 +1,8 @@
-# Green Certification System Design
+# Green Duty System Design
 
 ## Implementation approach
 
-After analyzing the requirements from the PRD, we'll implement the Green Certification system as a modular, scalable application with the following technical approach:
+After analyzing the requirements from the PRD, we'll implement the Green Duty system as a modular, scalable application with the following technical approach:
 
 ### Technology Stack
 - **Backend Framework**: FastAPI (Python) for high-performance API endpoints
@@ -339,7 +339,7 @@ graph TD
 
 ## Deployment Strategy
 
-The Green Certification system will be deployed using a containerized microservices architecture:
+The Green Duty system will be deployed using a containerized microservices architecture:
 
 1. **Containerization**
    - Each service will be packaged as a Docker container

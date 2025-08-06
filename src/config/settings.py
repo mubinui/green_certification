@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
     API_PORT: int = int(os.getenv("API_PORT", "8000"))
     API_V1_STR: str = "/api/v1"
-    PROJECT_NAME: str = "Green Certification"
+    PROJECT_NAME: str = "Green Duty"
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     
     # Security
@@ -18,20 +18,20 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # Database
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/green_certification")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/green_duty")
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "postgres")
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "green_certification")
+    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "green_duty")
     POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
     
     # Object Storage
-    STORAGE_BUCKET: str = os.getenv("STORAGE_BUCKET", "green-certification")
+    STORAGE_BUCKET: str = os.getenv("STORAGE_BUCKET", "green-duty")
     STORAGE_TYPE: str = os.getenv("STORAGE_TYPE", "local")  # local, s3, etc.
     
     # Gemma Model
     OLLAMA_API_URL: str = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api")
-    GEMMA_MODEL_NAME: str = os.getenv("GEMMA_MODEL_NAME", "gemma:3n")
+    GEMMA_MODEL_NAME: str = os.getenv("GEMMA_MODEL_NAME", "gemma3n:latest")
     
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")

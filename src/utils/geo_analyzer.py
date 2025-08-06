@@ -8,7 +8,7 @@ from ..config import settings
 
 class GeoAnalyzer:
     """
-    Analyzes geographic data for the Green Certification system.
+    Analyzes geographic data for the Green Duty system.
     Provides utilities for evaluating geographic suitability and proximity.
     """
     

@@ -1,13 +1,13 @@
-# Green Certification - Product Requirements Document
+# Green Duty - Product Requirements Document
 
-**Project Name:** Green Certification  
+**Project Name:** Green Duty  
 **Document Version:** 1.0  
 **Created By:** Emma - Product Manager  
 **Date:** July 13, 2025
 
 ## Original Requirements
 
-Build a "Green Certification" system with three APIs that will analyze tree images with geolocation data to evaluate and certify tree planting efforts:
+Build a "Green Duty" system with three APIs that will analyze tree images with geolocation data to evaluate and certify tree planting efforts:
 
 1. An API to process geotagged tree images with latitude and longitude
 2. An API that integrates with Gemma 3n model (via Ollama) to detect tree species and age
@@ -118,7 +118,7 @@ All data needs to be saved in a database.
 - No real-time planting guidance
 - Limited integration with field operations
 
-#### 1.3.7 The Green Certification System (Our Target Product)
+#### 1.3.7 The Green Duty System (Our Target Product)
 **Pros:**
 - AI-powered species identification and age estimation
 - Geographical suitability analysis
@@ -148,14 +148,14 @@ quadrantChart
     "ForestAI": [0.82, 0.65]
     "Tree-Nation": [0.30, 0.55]
     "Terrascope": [0.75, 0.68]
-    "Our Green Certification": [0.85, 0.85]
+    "Our Green Duty": [0.85, 0.85]
 ```
 
 ## 2. Technical Specifications
 
 ### 2.1 Requirements Analysis
 
-The Green Certification system requires three interconnected APIs that work together to process tree images, identify species and age, and evaluate planting efforts. The system will integrate with the Gemma 3n model from Ollama for computer vision tasks, requiring specific engineering to ensure efficient model usage and accurate results.
+The Green Duty system requires three interconnected APIs that work together to process tree images, identify species and age, and evaluate planting efforts. The system will integrate with the Gemma 3n model from Ollama for computer vision tasks, requiring specific engineering to ensure efficient model usage and accurate results.
 
 The system must be able to:
 1. Process multiple images of a single tree from different angles

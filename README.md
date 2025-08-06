@@ -1,4 +1,4 @@
-# Green Certification API
+# Green Duty API
 
 A tree analysis and certification system that uses image processing and AI to identify tree species, analyze their environmental impact, and provide certification recommendations.
 
@@ -20,7 +20,7 @@ A tree analysis and certification system that uses image processing and AI to id
 ## Project Structure
 
 ```
-green_certification/
+green_duty/
 ├── docs/                    # Documentation files
 │   ├── prd.md               # Product Requirements Document
 │   ├── system_design.md     # System Design Document

@@ -8,7 +8,7 @@ services:
     volumes:
       - ./uploads:/app/uploads
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/green_certification
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/green_duty
       - DEBUG=true
       - GEMMA_API_KEY=${GEMMA_API_KEY}
     depends_on:
@@ -24,7 +24,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=green_certification
+      - POSTGRES_DB=green_duty
     restart: unless-stopped
 
 volumes:
