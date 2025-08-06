@@ -6,7 +6,6 @@ from sqlalchemy import Column, String, Float, Boolean, DateTime, ForeignKey, Int
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from geoalchemy2 import Geography
 
 Base = declarative_base()
 
@@ -53,7 +52,6 @@ class Upload(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
-    location = Column(Geography(geometry_type='POINT', srid=4326), nullable=False)  # PostGIS Point
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     planting_date = Column(DateTime)

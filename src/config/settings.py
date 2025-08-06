@@ -1,20 +1,24 @@
 import os
 from pydantic import BaseSettings
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 
 class Settings(BaseSettings):
     """Application settings"""
     
     # API settings
+    API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
+    API_PORT: int = int(os.getenv("API_PORT", "8000"))
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Green Certification"
+    DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY", "supersecretkey")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # Database
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/green_certification")
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "postgres")
@@ -31,6 +35,10 @@ class Settings(BaseSettings):
     
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    UVICORN_LOG_LEVEL: str = os.getenv("UVICORN_LOG_LEVEL", "INFO")
+    
+    # CORS
+    CORS_ORIGINS: List[str] = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8000").split(",")
     
     # Cache
     REDIS_HOST: Optional[str] = os.getenv("REDIS_HOST")

@@ -4,7 +4,11 @@ from sqlalchemy.orm import sessionmaker
 
 from ..config import settings
 
-DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}"
+# Use DATABASE_URL from environment if available, otherwise construct it
+if hasattr(settings, 'DATABASE_URL') and settings.DATABASE_URL:
+    DATABASE_URL = settings.DATABASE_URL
+else:
+    DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

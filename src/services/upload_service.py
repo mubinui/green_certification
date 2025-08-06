@@ -55,9 +55,9 @@ class UploadService:
             user_id=user_id,
             latitude=latitude,
             longitude=longitude,
-            description=description,
+            additional_notes=description,
             status=models.UploadStatus.PENDING,
-            timestamp=datetime.utcnow()
+            upload_timestamp=datetime.utcnow()
         )
         
         # Save to database
