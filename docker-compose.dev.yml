@@ -1,0 +1,30 @@
+# Docker Compose Override for Development
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+      - /app/.venv  # Prevent overwriting the virtual environment
+    environment:
+      - DEBUG=true
+      - RELOAD=true
+    command: >
+      sh -c "
+        echo 'Development mode - watching for file changes' &&
+        sleep 10 &&
+        alembic upgrade head &&
+        uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload
+      "
+
+  # Remove nginx and model-init for development
+  nginx:
+    profiles: ["production"]
+    
+  model-init:
+    profiles: ["production"]

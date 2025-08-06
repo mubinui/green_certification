@@ -1,0 +1,66 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Virtual environments
+.venv
+venv/
+env/
+.env.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.tox/
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Documentation
+docs/_build/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Docker
+Dockerfile.dev
+docker-compose.override.yml
+
+# Local development
+.env.development
+.env.production

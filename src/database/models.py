@@ -73,7 +73,7 @@ class Image(Base):
     image_url = Column(String, nullable=False)
     image_type = Column(String, nullable=False)
     upload_timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
-    metadata = Column(JSON)
+    image_metadata = Column(JSON)
 
     # Relationships
     upload = relationship("Upload", back_populates="images")
